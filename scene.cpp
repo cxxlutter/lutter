@@ -1,4 +1,8 @@
+#include <iostream>
+#include <cmath>
 #include "scene.hpp"
+#include "config.hpp"
+#include "vector.hpp"
 
 namespace lutter {
 
@@ -21,7 +25,7 @@ maybe<real_t> intersect(ray r, sphere const& s) {
 
   if (discriminant_over_4 < 0)
     return nothing();
-  auto sqrt_of_discriminant_half = sqrt(discriminant_over_4);
+  auto sqrt_of_discriminant_half = std::sqrt(discriminant_over_4);
   auto x1 = (-b_half - sqrt_of_discriminant_half)/a;
   if (x1 > epsilon) return x1;
   auto x2 = (-b_half + sqrt_of_discriminant_half)/a;
@@ -29,6 +33,5 @@ maybe<real_t> intersect(ray r, sphere const& s) {
 
   return nothing();
 }
-
 
 } // end namespace lutter

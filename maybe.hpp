@@ -1,6 +1,8 @@
 #ifndef LUTTER_MAYBE_HPP
 #define LUTTER_MAYBE_HPP
 
+#include <cassert>
+#include <utility>
 #include <type_traits>
 
 namespace lutter {
