@@ -1,6 +1,10 @@
 #ifndef LUTTER_IMAGE_HPP
 #define LUTTER_IMAGE_HPP
 
+#include <cstdint>
+#include <cstddef>
+#include <limits>
+#include <cassert>
 #include <algorithm>
 #include "maybe.hpp"
 
@@ -20,7 +24,7 @@ struct image_encoder_8_bit {
   }
 
   // encodes the i-th channel (0=red, 1=green, 2=blue)
-  static channel_type channel(pixel_type const& p, size_t i) {
+  static channel_type channel(pixel_type const& p, std::size_t i) {
     auto val = clamp<typename pixel_type::value_type>(p[i], 0, 1);
     return static_cast<channel_type>(val * maxval());
   }
@@ -34,8 +38,8 @@ std::ostream& save_p3(std::ostream& os, ImageT const& img) {
      << "# a raytracing scene\n"
      << img.width() << ' ' << img.height() << '\n'
      << static_cast<int>(ImageTrait::maxval()) << '\n';
-  for (size_t y=0; y<img.height(); ++y) {
-    for (size_t x=0; x<img.width(); ++x) {
+  for (std::size_t y=0; y<img.height(); ++y) {
+    for (std::size_t x=0; x<img.width(); ++x) {
       for (int channel = 0; channel < 3; ++channel) {
         os << static_cast<int>(ImageTrait::channel(img[y][x], channel))
            << ' ';

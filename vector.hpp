@@ -1,9 +1,10 @@
 #ifndef LUTTER_VECTOR_HPP
 #define LUTTER_VECTOR_HPP
 
+#include <cstddef>
 #include <cassert>
+#include <utility>
 #include <type_traits>
-#include <cstdint>
 #include <iostream>
 #include <algorithm>
 
@@ -60,12 +61,14 @@ struct vector : std::array<T, Dim> {
     return v /= scalar;
   }
   friend std::ostream& operator<<(std::ostream& os, vector const& v) {
-    if (v.size()==0)
-      return os << "<>";
-    os << "<" << v[0];
-    for (std::size_t i=1; i<v.size(); ++i)
-      os << "," << v[i];
-    return os << ">";
+    os << '<';
+	if (v.size()==0)
+	{
+	  os << v[0];
+	  for (std::size_t i=1; i<v.size(); ++i)
+		os << ',' << v[i];
+	}
+    return os << '>';
   }
   friend vector component_wise_multiplication(vector lhs, vector const& rhs) {
     for (std::size_t i=0; i<Dim; ++i)
@@ -94,14 +97,18 @@ typename Vec::value_type norm_squared(Vec const& v) {
 }
 
 template <typename Vec>
-Vec normalized(Vec v) {
-  return v/sqrt(norm_squared(v));
+typename Vec::value_type abs(Vec const& v) {
+  return std::sqrt(norm_squared(v));
+}
+
+template <typename Vec>
+Vec normalized(Vec const& v) {
+  return v/abs(v);
 }
 
 template <typename Vec>
 Vec cross(Vec const& lhs, Vec const& rhs) {
-  assert(lhs.size() == 3);
-  assert(rhs.size() == 3);
+  static_assert(lhs.size() == 3, "cross: arguments not in R^3");
   return Vec{
     lhs[1]*rhs[2] - lhs[2]*rhs[1],
     lhs[2]*rhs[0] - lhs[0]*rhs[2],

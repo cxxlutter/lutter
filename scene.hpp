@@ -12,7 +12,7 @@
 namespace lutter {
 
 inline bool is_normalized(vector3d_t const& vec) {
-  return norm_squared(vec) - 1 < epsilon;
+  return std::abs(norm_squared(vec) - 1) < epsilon;
 }
 
 struct ray {
