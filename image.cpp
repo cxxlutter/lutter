@@ -10,8 +10,8 @@ std::ostream& save_p3(std::ostream& os, erased_image<std::uint8_t>& img) {
      << "# a raytracing scene\n"
      << img.width() << ' ' << img.height() << '\n'
      << static_cast<int>(std::numeric_limits<uint8_t>::max()) << '\n';
-  for (size_t y=0; y<img.height(); ++y) {
-    for (size_t x=0; x<img.width(); ++x) {
+  for (std::size_t y=0; y<img.height(); ++y) {
+    for (std::size_t x=0; x<img.width(); ++x) {
       for (int channel = 0; channel < 3; ++channel) {
         os << static_cast<int>(img.at(y, x, channel)) << ' ';
       }

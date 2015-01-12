@@ -2,6 +2,7 @@
 #define LUTTER_QUATERNION_HPP
 
 #include <cassert>
+#include <utility>
 #include "vector.hpp"
 
 namespace lutter {

@@ -1,6 +1,10 @@
 #ifndef LUTTER_IMAGE_HPP
 #define LUTTER_IMAGE_HPP
 
+#include <cstdint>
+#include <cstddef>
+#include <limits>
+#include <cassert>
 #include <algorithm>
 #include <iosfwd>
 #include <cassert>
@@ -24,7 +28,7 @@ struct image_encoder_8_bit {
   }
 
   // encodes the i-th channel (0=red, 1=green, 2=blue)
-  static channel_type channel(pixel_type const& p, size_t i) {
+  static channel_type channel(pixel_type const& p, std::size_t i) {
     auto val = clamp<typename pixel_type::value_type>(p[i], 0, 1);
     return static_cast<channel_type>(val * maxval());
   }
