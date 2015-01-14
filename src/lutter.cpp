@@ -37,10 +37,11 @@ void render(scene& s, image_t& img) {
 
   auto const ez = vector3d_t(0.,0.,1.);
   auto const cam_rot = quaternion_rotation(ez, s.cam.direction);
-  assert(norm_squared(cam_rot*ez - s.cam.direction) < epsilon);
+  assert(length_squared(cam_rot*ez - s.cam.direction) < epsilon);
 
   auto const dx = s.cam.right/img.width();
   auto const dy = s.cam.up/img.height();
+  auto const dz = ez;
 
   for (size_t y=0; y<img.height(); ++y){
     for (size_t x=0; x<img.width(); ++x){
@@ -51,7 +52,7 @@ void render(scene& s, image_t& img) {
       }
       vector3d_t dir =(( real_t(x) - img.width()/real_t(2))*dx +
                        (-real_t(y) + img.height()/real_t(2))*dy +
-                       ez);
+                       dz);
       ray r{s.cam.location, normalized(cam_rot*dir)};
       img[y][x] = raytrace(s, r);
     }

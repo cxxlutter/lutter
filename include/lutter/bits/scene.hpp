@@ -2,7 +2,7 @@ namespace lutter {
 
 inline bool is_normalized(vector3d_t const& vec) {
   using std::abs;
-  return abs(norm_squared(vec) - 1) < epsilon;
+  return abs(length_squared(vec) - 1) < epsilon;
 }
 
 inline vector3d_t ray::at(real_t t) const {

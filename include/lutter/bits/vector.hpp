@@ -42,6 +42,16 @@ vector<T, Dim>& vector<T, Dim>::operator/=(T const& scalar) {
 }
 
 template <typename T, std::size_t Dim>
+auto vector<T, Dim>::length() -> value_type {
+  return abs(*this);
+}
+
+template <typename T, std::size_t Dim>
+void vector<T, Dim>::normalize() {
+  *this = normalized(*this);
+}
+
+template <typename T, std::size_t Dim>
 std::ostream& operator<<(std::ostream& os, vector<T, Dim> const& v) {
   if (v.size()==0)
     return os << "<>";
@@ -71,14 +81,14 @@ typename Vec::value_type dot(Vec const& lhs, Vec const& rhs) {
 }
 
 template <typename Vec>
-typename Vec::value_type norm_squared(Vec const& v) {
+typename Vec::value_type length_squared(Vec const& v) {
   return dot(v, v);
 }
 
 template <typename Vec>
 typename Vec::value_type abs(Vec const& v) {
   using std::sqrt;
-  return sqrt(norm_squared(v));
+  return sqrt(length_squared(v));
 }
 
 template <typename Vec>

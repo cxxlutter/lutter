@@ -13,4 +13,9 @@ T clamp(T x, T min, T max) {
   return x;
 }
 
+template <typename T, typename Scalar>
+T lerp(T const& x, T const& y, Scalar t) {
+  return x*(1-t) + y*t;
+}
+
 } // end namespace lutter

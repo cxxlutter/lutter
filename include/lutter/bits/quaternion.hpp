@@ -60,6 +60,16 @@ quaternion<T>& quaternion<T>::operator/=(T const& scalar) {
 }
 
 template <typename T>
+auto quaternion<T>::length() -> value_type {
+  return abs(*this);
+}
+
+template <typename T>
+void quaternion<T>::normalize() {
+  *this = normalized(*this);
+}
+
+template <typename T>
 quaternion<T> quaternion_rotation_from_units(vector3d<T> const& from,
                                              vector3d<T> const& to) {
   return normalized(quaternion<T>(1 + dot(from, to),

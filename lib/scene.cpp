@@ -20,7 +20,7 @@ maybe<real_t> intersect(ray r, sphere const& s) {
   const real_t a = 1;
   const auto delta = r.origin - s.center;
   const real_t b_half = dot(r.direction, delta);
-  const real_t c = norm_squared(delta) - squared(s.radius);
+  const real_t c = length_squared(delta) - squared(s.radius);
 
   const real_t discriminant_over_4 = squared(b_half) - a*c;
 

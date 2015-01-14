@@ -24,6 +24,7 @@ vector<T, Dim> compwise_mult(vector<T, Dim> lhs, vector<T, Dim> const& rhs);
 
 template <typename T, std::size_t Dim>
 struct vector : std::array<T, Dim> {
+  using value_type = typename std::array<T, Dim>::value_type;
   static constexpr std::size_t dimension = Dim;
 
   vector() =default;
@@ -49,6 +50,9 @@ struct vector : std::array<T, Dim> {
   friend vector operator*(vector lhs, vector const& rhs) {
     return detail::compwise_mult(std::move(lhs), rhs);
   }
+
+  void normalize();
+  value_type length();
 };
 
 template <typename T, std::size_t Dim>
@@ -64,7 +68,7 @@ template <typename Vec>
 typename Vec::value_type dot(Vec const& lhs, Vec const& rhs);
 
 template <typename Vec>
-typename Vec::value_type norm_squared(Vec const& v);
+typename Vec::value_type length_squared(Vec const& v);
 
 template <typename Vec>
 typename Vec::value_type abs(Vec const& v);
