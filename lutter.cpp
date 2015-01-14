@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "scene.hpp"
 #include "reader.hpp"
 #include "vector.hpp"
@@ -60,11 +61,32 @@ void render(scene& s, image_t& img) {
 
 } // end namespace lutter
 
-int main() {
+int main(int argc, char const* argv[]) {
   lutter::scene s;
+
   if (!lutter::read_pov_scene(std::cin, s))
     return 1;
+
+  lutter::image_type format = lutter::image_type::p3;
+  bool failed = false;
+  for (int i=1; i<argc; ++i) {
+    if (argv[i] == lutter::string_ref("-f") && i+1<argc) {
+      ++i;
+      if (auto f = lutter::image_type_from_string(argv[i])) {
+        format = *f;
+      } else {
+        failed = true;
+        std::cerr << "unrecognized format: `" << argv[i] << "'\n";
+      }
+    } else {
+      failed = true;
+      std::cerr << "unrecognized command line option: `" << argv[i] << "'\n";
+    }
+  }
+  if (failed)
+    return 2;
+
   lutter::image_t arr(s.image_height, s.image_width);
   lutter::render(s, arr);
-  lutter::save_p3(std::cout, arr);
+  lutter::save_image(std::cout, arr, format);
 }
