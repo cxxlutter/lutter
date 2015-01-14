@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
-#include "scene.hpp"
-#include "reader.hpp"
-#include "vector.hpp"
-#include "array2d.hpp"
-#include "image.hpp"
-#include "quaternion.hpp"
-#include "config.hpp"
+#include "lutter/scene.hpp"
+#include "lutter/reader.hpp"
+#include "lutter/vector.hpp"
+#include "lutter/array2d.hpp"
+#include "lutter/image.hpp"
+#include "lutter/quaternion.hpp"
+#include "lutter/config.hpp"
 
 namespace lutter {
 
@@ -23,8 +23,7 @@ color_t raytrace(scene& s, ray r, int depth=0) {
     assert(is_normalized(norm));
     auto next_ray = ray{on, normalized(r.direction-2*norm*dot(norm, r.direction))};
     assert(is_normalized(next_ray));
-    auto incoming = component_wise_multiplication(sph.mat.color,
-                                                  raytrace(s, next_ray, depth+1));
+    auto incoming = sph.mat.color * raytrace(s, next_ray, depth+1);
     return sph.mat.emission + incoming;
   }
   if (r.direction[1] > 0)

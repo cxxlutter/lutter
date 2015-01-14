@@ -3,6 +3,7 @@
 #include "scene.hpp"
 #include "config.hpp"
 #include "vector.hpp"
+#include "utils.hpp"
 
 namespace lutter {
 

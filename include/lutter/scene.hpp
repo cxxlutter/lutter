@@ -11,16 +11,13 @@
 
 namespace lutter {
 
-inline bool is_normalized(vector3d_t const& vec) {
-  using std::abs;
-  return abs(norm_squared(vec) - 1) < epsilon;
-}
+bool is_normalized(vector3d_t const& vec);
 
 struct ray {
   vector3d_t origin, direction;
-  vector3d_t at(real_t t) const { return origin + t*direction; }
+  vector3d_t at(real_t t) const;
 };
-inline bool is_normalized(ray const& r) { return is_normalized(r.direction); }
+bool is_normalized(ray const& r);
 
 struct material {
   color_t emission;
@@ -52,25 +49,10 @@ struct scene {
 };
 
 template <typename Iter>
-maybe<std::pair<real_t, Iter> >
-first_hit(ray r, Iter first, Iter last) {
-  assert(first <= last);
-  maybe<real_t> nearest = nothing();
-  Iter object; // only used if nearest was set
-
-  for (; first != last; ++first) {
-    auto at = intersect(r, *first);
-    if (at && (!nearest || *at < *nearest)) {
-      nearest = at;
-      object = first;
-    }
-  }
-
-  if (!nearest)
-    return nothing();
-  return std::make_pair(nearest.data(), object);
-}
+maybe<std::pair<real_t, Iter> > first_hit(ray r, Iter first, Iter last);
 
 } // end namespace lutter
+
+#include "bits/scene.hpp"
 
 #endif /* LUTTER_SCENE_HPP */

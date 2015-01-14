@@ -1,0 +1,8 @@
+*.o
+*~
+imgs/
+build/
+scene.txt
+scene.bmp
+scene.ppm
+.sconsign.dblite

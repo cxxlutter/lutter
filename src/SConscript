@@ -1,0 +1,16 @@
+from os import path
+import glob
+
+Import('env', 'buildroot', 'project')
+localenv = env.Clone()
+
+builddir = path.join(buildroot, project)
+targetpath = path.join(builddir, project)
+
+localenv.Append(LIBS = 'lutter', LIBPATH = [path.join(buildroot, 'lib')])
+localenv.Append(CPPPATH=['../include'])
+
+localenv.VariantDir(builddir, ".", duplicate=0)
+
+srclst = map(lambda x: builddir + '/' + x, glob.glob('*.cpp'))
+localenv.Program(targetpath, source=srclst)

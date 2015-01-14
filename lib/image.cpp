@@ -1,6 +1,7 @@
 #include <iostream>
 #include <LunchTimeTracer/Image.hpp>
 #include "image.hpp"
+#include "utils.hpp"
 
 namespace lutter {
 
@@ -45,7 +46,7 @@ std::ostream& save_image(std::ostream& os, erased_image<std::uint8_t>& img,
   case image_type::bmp: return save_bmp(os, img);
   default: assert(false && "wrong image_type");
   }
-  assert(false);
+  LUTTER_UNREACHABLE();
 }
 
 maybe<image_type> image_type_from_string(string_ref type) {

@@ -1,0 +1,16 @@
+import glob
+from os import path
+
+Import('env', 'buildroot', 'project')
+localenv = env.Clone()
+
+builddir = path.join(buildroot, project)
+targetpath = path.join(builddir, "liblutter.a")
+
+localenv.Append(CPPPATH=['../../Lunch-Time-Tracer/Include',
+                         '../include/lutter'])
+
+localenv.VariantDir(builddir, ".", duplicate=0)
+
+srclst = map(lambda x: builddir + '/' + x, glob.glob('*.cpp'))
+localenv.Library(targetpath, source=srclst)

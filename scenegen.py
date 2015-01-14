@@ -1,8 +1,8 @@
 #!/usr/bin/python
 from math import sin, cos, pi
 print("""global {
-  width 16000
-  height 9000
+  width 1600
+  height 900
 }
 camera {
   location <0,10,-30>
