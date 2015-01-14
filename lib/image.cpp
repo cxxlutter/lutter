@@ -24,15 +24,16 @@ std::ostream& save_p3(std::ostream& os, erased_image<std::uint8_t>& img) {
 
 std::ostream& save_bmp(std::ostream& os, erased_image<std::uint8_t>& img) {
   LTT_TrippyColors::Image trippy_image(img.width(), img.height());
-  std::vector<std::uint8_t> channel_buf(3*img.width());
+  std::vector<std::uint8_t> channel_buf(4*img.width());
   for (std::size_t y=0, y_end=img.height(), x_end=img.width(); y<y_end; ++y) {
-    img.copy(y, y+1, 0, x_end, 0, 3, &*channel_buf.begin());
+    img.copy(y, y+1, 0, x_end, 0, 4, &*channel_buf.begin());
     auto it = channel_buf.begin();
     for (std::size_t x=0; x<x_end; ++x) {
       auto r = *it++;
       auto g = *it++;
       auto b = *it++;
-      trippy_image(x, y) = LTT_TrippyColors::ImageColor(r, g, b);
+      auto a = *it++;
+      trippy_image(x, y) = LTT_TrippyColors::ImageColor(r, g, b, a);
     }
   }
   LTT_TrippyColors::ToBmp(trippy_image, os);

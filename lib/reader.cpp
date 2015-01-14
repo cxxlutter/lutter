@@ -55,32 +55,37 @@ struct unique_keyword {
 };
 
 template <typename T>
-std::istream& read_vector(std::istream& in, T& v, std::string kw={}) {
-  return in >> keyword(kw) >> Char<'<'>
-            >> v[0] >> Char<','> >> v[1] >> Char<','> >> v[2]
+std::istream& read_vector3d(std::istream& in, T& v, std::string kw={}) {
+  return in >> keyword(kw) >> Char<'<'> >> v[0] >> Char<','> >> v[1] >> Char<','> >> v[2]
             >> Char<'>'>;
+}
+
+std::istream& read_color(std::istream& in, color_t& c, std::string kw={}) {
+  read_vector3d(in, c, kw);
+  c[3] = 1;
+  return in;
 }
 
 void read_cam(std::istream& in, scene& s) {
   bracket_scope _(in);
-  read_vector(in, s.cam.location, "location");
-  read_vector(in, s.cam.direction, "direction");
-  read_vector(in, s.cam.right, "right");
-  read_vector(in, s.cam.up, "up");
+  read_vector3d(in, s.cam.location, "location");
+  read_vector3d(in, s.cam.direction, "direction");
+  read_vector3d(in, s.cam.right, "right");
+  read_vector3d(in, s.cam.up, "up");
   s.cam.direction = normalized(s.cam.direction);
 
-  read_vector(in, s.sky_emission, "sky_emission");
-  read_vector(in, s.ground_emission, "ground_emission");
+  read_color(in, s.sky_emission, "sky_emission");
+  read_color(in, s.ground_emission, "ground_emission");
 }
 
 void read_sphere(std::istream& in, scene& s) {
   sphere sp;
   {
     bracket_scope _(in);
-    read_vector(in, sp.center);
+    read_vector3d(in, sp.center);
     in >> Char<','> >> sp.radius;
-    read_vector(in, sp.mat.color, "color");
-    read_vector(in, sp.mat.emission, "emission");
+    read_color(in, sp.mat.color, "color");
+    read_color(in, sp.mat.emission, "emission");
   }
   if (in) {
     s.spheres.push_back(sp);
