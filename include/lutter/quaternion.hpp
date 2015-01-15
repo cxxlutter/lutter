@@ -45,9 +45,6 @@ public:
 
   friend T dot(quaternion const& lhs, quaternion const& rhs) { return lhs.r*rhs.r + dot(lhs.v, rhs.v); }
   friend quaternion conj(quaternion const& q) { return quaternion(q.r, -q.v); }
-
-  void normalize();
-  value_type length();
 };
 
 template <typename T>

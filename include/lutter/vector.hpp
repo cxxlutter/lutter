@@ -50,9 +50,6 @@ struct vector : std::array<T, Dim> {
   friend vector operator*(vector lhs, vector const& rhs) {
     return detail::compwise_mult(std::move(lhs), rhs);
   }
-
-  void normalize();
-  value_type length();
 };
 
 template <typename T, std::size_t Dim>

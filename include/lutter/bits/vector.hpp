@@ -42,16 +42,6 @@ vector<T, Dim>& vector<T, Dim>::operator/=(T const& scalar) {
 }
 
 template <typename T, std::size_t Dim>
-auto vector<T, Dim>::length() -> value_type {
-  return abs(*this);
-}
-
-template <typename T, std::size_t Dim>
-void vector<T, Dim>::normalize() {
-  *this = normalized(*this);
-}
-
-template <typename T, std::size_t Dim>
 std::ostream& operator<<(std::ostream& os, vector<T, Dim> const& v) {
   if (v.size()==0)
     return os << "<>";
@@ -92,6 +82,12 @@ typename Vec::value_type abs(Vec const& v) {
 }
 
 template <typename Vec>
+typename Vec::value_type length(Vec const& v) {
+  using std::abs;
+  return abs(v);
+}
+
+template <typename Vec>
 Vec normalized(Vec const& v) {
   return v/abs(v);
 }
@@ -106,4 +102,4 @@ Vec cross(Vec const& lhs, Vec const& rhs) {
   };
 }
 
-}
+} // end namespace lutter

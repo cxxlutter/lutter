@@ -14,7 +14,7 @@ template <typename T>
 T clamp(T x, T min, T max);
 
 template <typename T, typename Scalar>
-T lerp(T const& x, T const& y, Scalar t)
+T lerp(T const& x, T const& y, Scalar t);
 
 } // end namespace lutter
 
