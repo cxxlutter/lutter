@@ -78,6 +78,6 @@ Vec cross(Vec const& lhs, Vec const& rhs);
 
 } // end namespace lutter
 
-#include "bits/vector.hpp"
+#include "bits/vector.inl"
 
 #endif /* LUTTER_VECTOR_HPP */

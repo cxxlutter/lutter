@@ -56,6 +56,6 @@ quaternion<T> quaternion_rotation(vector3d<T> const& from,
 
 } // end namespace lutter
 
-#include "bits/quaternion.hpp"
+#include "bits/quaternion.inl"
 
 #endif /* LUTTER_QUATERNION_HPP */

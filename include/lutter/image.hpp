@@ -66,6 +66,6 @@ std::ostream& save_image(std::ostream& os, ImageT img, image_type format);
 
 } // end namespace lutter
 
-#include "bits/image.hpp"
+#include "bits/image.inl"
 
 #endif /* LUTTER_IMAGE_HPP */

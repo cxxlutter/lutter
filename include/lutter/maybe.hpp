@@ -46,6 +46,6 @@ maybe<T> just(Args&&... args);
 
 } // end namespace lutter
 
-#include "bits/maybe.hpp"
+#include "bits/maybe.inl"
 
 #endif /* LUTTER_MAYBE_HPP */

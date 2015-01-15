@@ -53,6 +53,6 @@ maybe<std::pair<real_t, Iter> > first_hit(ray r, Iter first, Iter last);
 
 } // end namespace lutter
 
-#include "bits/scene.hpp"
+#include "bits/scene.inl"
 
 #endif /* LUTTER_SCENE_HPP */

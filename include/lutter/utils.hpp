@@ -18,6 +18,6 @@ T lerp(T const& x, T const& y, Scalar t);
 
 } // end namespace lutter
 
-#include "bits/utils.hpp"
+#include "bits/utils.inl"
 
 #endif /* LUTTER_UTILS_HPP */

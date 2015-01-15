@@ -35,6 +35,6 @@ public:
 
 } // end namespace lutter
 
-#include "bits/array2d.hpp"
+#include "bits/array2d.inl"
 
 #endif /* LUTTER_ARRAY2D_HPP */
