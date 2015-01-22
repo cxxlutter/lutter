@@ -6,6 +6,8 @@ A simple raytracer using C++11, created in collaboration in a thread_ on
 .. _thread: https://www.c-plusplus.net/forum/330421-full
 .. __:  https://www.c-plusplus.net
 
+It is released under the MPL 2.0 license, please see the file called LICENSE.
+
 External Requirements
 ---------------------
 For export to `.bmp`, TrippyColor's Lunch-Time-Tracer is needed in
